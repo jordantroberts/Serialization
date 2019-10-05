@@ -7,6 +7,7 @@ namespace Serialization
         static void Main(string[] args)
         {
             WriteXML();
+            ReadXML();
         }
 
 
@@ -27,6 +28,19 @@ namespace Serialization
 
             writer.Serialize(file, book);
             file.Close();
+        }
+
+        public static void ReadXML()
+        {
+            System.Xml.Serialization.XmlSerializer reader =
+                new System.Xml.Serialization.XmlSerializer(typeof(Book));
+
+            System.IO.StreamReader file = new System.IO.StreamReader(@"/Users/jordan/SerializationOverview.xml");
+            Book book = (Book)reader.Deserialize(file);
+            file.Close();
+
+            Console.WriteLine(book.title);
+
         }
     }
 }
